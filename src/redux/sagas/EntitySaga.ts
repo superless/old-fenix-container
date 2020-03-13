@@ -2,7 +2,7 @@ import { put, call, takeEvery, all, fork } from "redux-saga/effects";
 import * as actionCreators from "./../actionCreators/EntityActionCreator";
 import * as actionTypes from "./../actionTypes/EntityActionTypes";
 import {EntitySearch} from "./../../search/EntitySearch";
-import { IResult } from "../../model/IResult";
+import { IResult } from "tf-search-model";
 
 
 
@@ -15,7 +15,20 @@ function* onLoadEntitys({url, page, search, ElementsInPage, entity, index, key }
     
     const result : IResult = yield call(EntitySearch,url, key,index,page, ElementsInPage,`EntityIndex eq ${entity}`,search);
 
-   
+    let ids : string[] = result.entities.reduce((pn:string[], u) => [ ...pn, ...u.RelatedIds.map(s=>s.EntityId) ], []);
+
+    let join = `RelatedProperties/any(element: element/PropertyIndex eq 6) and (Id eq '${ids.join("' or Id eq '")}')`
+    let select = 'RelatedProperties/PropertyIndex,RelatedProperties/Value, Id';
+    const resultName : IResult = yield call(EntitySearch,url, key,index,page, ElementsInPage,join,search, select);
+
+    result.entities = result.entities.map(s => {
+      var names = resultName.entities.map(i=>({id : i.Id, name : i.RelatedProperties.filter(f=>f.PropertyIndex ===6)[0].Value}));
+      s.RelatedIds = s.RelatedIds.map(a => ({ ...a, name:names.some(s=>s.id === a.EntityId)? names.filter(s=>s.id === a.EntityId)[0].name:""}));
+      return s;
+
+    });
+
+
     
     
     yield put(actionCreators.GetSearchEntitySuccess(result, entity));
@@ -25,31 +38,9 @@ function* onLoadEntitys({url, page, search, ElementsInPage, entity, index, key }
     yield put(actionCreators.GetSearchEntityFailure(error.response.data.error));
   }
 }
-function* onLoadEntitysName({url, page, search, entity, ElementsInPage, index, key, ids }:actionTypes.GetSearchEntityAction) {
-  
-  try {
-    yield put(actionCreators.GetSearchEntityRequestName());
-    
-    let join = `RelatedProperties/any(element: element/PropertyIndex eq 6) and (Id eq '${ids.join("' or Id eq '")}')`
-    let select = 'RelatedProperties/PropertyIndex,RelatedProperties/Value, Id';
-    
-    const result : IResult = yield call(EntitySearch,url, key,index,page,ElementsInPage,join,search, select);
-    
-    
-    
-    
-    yield put(actionCreators.GetSearchEntitySuccessName(result, entity));
 
-
-  } catch (error) {
-    yield put(actionCreators.GetSearchEntityFailureName(error.response.data.error));
-  }
-}
 
 export function* watchOnLoadEntitys() {
   yield takeEvery(actionTypes.GET_SEARCH_ENTITY, onLoadEntitys);
 }
 
-export function* watchOnLoadEntitysName() {
-  yield takeEvery(actionTypes.GET_SEARCH_ENTITY_NAME, onLoadEntitysName);
-}

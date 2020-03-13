@@ -1,5 +1,5 @@
-import { IEntitySearch } from "../model/IEntitySearch";
-import { IResult } from "../model/IResult";
+import { IEntitySearch, IResult } from "tf-search-model";
+
 
 var AzureSearch = require('azure-search');
 

@@ -14,7 +14,7 @@ export default [
       { file: pkg.main, format: 'cjs' },
       { file: pkg.module, format: 'esm' },
       {
-        file: './../../../agro.web/src/views/Orders/index.js',
+        file: './../../agro.web/src/views/Orders/index.js',
         format: 'es',
         banner: '/* eslint-disable */',
       },
