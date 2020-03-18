@@ -32,6 +32,10 @@ export interface GetSearchFilterTypesFailureAction {
   error: string;
 }
 
-
+export type EntityFilterAction = 
+  | GetSearchFilterTypesAction
+  | GetSearchFilterTypesRequestAction
+  | GetSearchFilterTypesSucessAction
+  | GetSearchFilterTypesFailureAction
 
 

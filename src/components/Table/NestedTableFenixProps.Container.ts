@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import {GetSearchEntity} from "../../redux/actionCreators/EntityActionCreator";
+import {GetSearchEntity} from "../../redux/actionCreators/EntityTableActionCreator";
 import * as actionTypes from "../../redux/actionTypes/EntityTableActionTypes";
 import {NestedTableFenix} from "./NestedTableFenixProps.Component";
 import { AppState } from "../../redux/reducer/rootReducer";

@@ -1,5 +1,5 @@
 import { put, call, takeEvery, all, fork } from "redux-saga/effects";
-import * as actionCreators from "./../actionCreators/EntityActionCreator";
+import * as actionCreators from "../actionCreators/EntityTableActionCreator";
 import * as actionTypes from "../actionTypes/EntityTableActionTypes";
 import {EntitySearch} from "./../../search/EntitySearch";
 import { IResult } from "tf-search-model";
