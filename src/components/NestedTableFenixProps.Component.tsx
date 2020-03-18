@@ -17,6 +17,8 @@ export interface INestedTableFenixProps {
     page: number,
     ElementsInPage: number,
     search: string) => any;
+    headerRelated:(header:number)=>string;  
+    headerProperty:(header:number)=>string;
     
     
 
@@ -37,6 +39,6 @@ export function NestedTableFenix (props: INestedTableFenixProps) {
     
   },[]);
   return (
-    <TableFenix  elements = {result?.get(entity)} loading={isLoading} />
+    <TableFenix  elements = {result?.get(entity)} loading={isLoading} headerProperty={props.headerProperty} headerRelated={props.headerRelated} />
   );
 }

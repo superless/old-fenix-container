@@ -9,6 +9,8 @@ export interface ITableFenixProps {
    azureKey:string;
    index:string;
    entity:number;
+  headerRelated:(header:number)=>string;  
+  headerProperty:(header:number)=>string;
 }
 
 export default function TableFenix (props: ITableFenixProps) {
