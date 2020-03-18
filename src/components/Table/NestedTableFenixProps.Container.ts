@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import {GetSearchEntity} from "../redux/actionCreators/EntityActionCreator";
-import * as actionTypes from "../redux/actionTypes/EntityActionTypes";
+import {GetSearchEntity} from "../../redux/actionCreators/EntityActionCreator";
+import * as actionTypes from "../../redux/actionTypes/EntityTableActionTypes";
 import {NestedTableFenix} from "./NestedTableFenixProps.Component";
-import { AppState } from "../redux/reducer/rootReducer";
+import { AppState } from "../../redux/reducer/rootReducer";
 
-const mapDispatchProps = (dispatch:Dispatch<actionTypes.EntityAction>) =>(
+const mapDispatchProps = (dispatch:Dispatch<actionTypes.EntityTableAction>) =>(
   {
     onLoad: (url: string,
       key: string,

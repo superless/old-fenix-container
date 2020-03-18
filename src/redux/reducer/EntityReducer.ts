@@ -1,4 +1,4 @@
-import * as actions from "./../actionTypes/EntityActionTypes";
+import * as actions from "../actionTypes/EntityTableActionTypes";
 import { IResult } from "tf-search-model";
 
 

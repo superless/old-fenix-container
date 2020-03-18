@@ -1,3 +1,3 @@
-import TableSearchFenix from './components/TableSearchFenix';
+import TableSearchFenix from './components/Table/TableSearchFenix';
 
 export { TableSearchFenix };

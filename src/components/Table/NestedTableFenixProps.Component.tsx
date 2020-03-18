@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IResult } from 'tf-search-model';
-import { TableFenix} from './temp_component/index';
+import { TableFenix} from '../temp_component/index';
 
 export interface INestedTableFenixProps {
    urlAzure:string;
