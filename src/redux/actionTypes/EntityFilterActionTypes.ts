@@ -1,15 +1,23 @@
-import { CategoryEntity } from "../../model/CategoryEntity";
-import { SearchEntityType } from "../../model/SearchEntityType";
+import { IndexEntityName, IndexEntityRelatedIdCategory, FilterOptionsContainer } from "../../model/CategoryEntity";
+import { AzureInput } from "./AzureInput";
+
 
 export const GET_SEARCH_TYPES  = "searchFilterActionTypes/GET_SEARCH_TYPES";
 
-export interface GetSearchFilterTypesAction {
+export interface searchTypeInput {
+  indexMainEntity?: number,  
+  indexFilters:number[]; // los indices que se irán a buscar en el facet.
+  indexEntitySearchType : number; // cual es la entidad que irá a buscar, el indice de la busqueda
+  searchTypeData : IndexEntityName | IndexEntityRelatedIdCategory;
+  maxFacets: number;
+}
+
+export interface searchTypeAzureInput extends searchTypeInput, AzureInput {
+
+}
+
+export interface GetSearchFilterTypesAction extends searchTypeAzureInput {
   type: typeof GET_SEARCH_TYPES;
-  url: string,
-  key: string,
-  index: string,
-  entity: number,
-  categoryEntities?:CategoryEntity[];
 }
 
 export const GET_SEARCH_TYPES_REQUEST = "searchFilterActionTypes/GET_SEARCH_TYPES_REQUEST";
@@ -21,8 +29,8 @@ export interface GetSearchFilterTypesRequestAction {
 export const  GET_SEARCH_TYPES_SUCCESS = "searchFilterActionTypes/GET_SEARCH_TYPES_SUCCESS";
 export interface GetSearchFilterTypesSucessAction {
   type: typeof GET_SEARCH_TYPES_SUCCESS;
-  value : SearchEntityType[];
-  entity : number;
+  value : FilterOptionsContainer;
+  entity? : number;
 }
 
 export const GET_SEARCH_TYPES_FAILURE = "searchFilterActionTypes/GET_SEARCH_TYPES_FAILURE";

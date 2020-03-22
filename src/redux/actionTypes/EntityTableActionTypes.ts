@@ -1,17 +1,25 @@
 import { IResult } from "tf-search-model";
+import { AzureInput } from "./AzureInput";
 
 export const GET_SEARCH_ENTITY = "searchTableActionTypes/GET_SEARCH_ENTITY";
 
-export interface GetSearchEntityAction {
-  type: typeof GET_SEARCH_ENTITY;
-  url: string,
-  key: string,
-  index: string,
+
+
+
+export interface EntityActionInput {
   entity: number,
   page: number,
   ElementsInPage: number,
-  search: string,
-  ids:string[]
+  search: string
+}
+
+export interface EntityActionAzureInput extends AzureInput, EntityActionInput {
+  
+}
+
+export interface GetSearchEntityAction extends EntityActionAzureInput {
+  type: typeof GET_SEARCH_ENTITY;
+  
 }
 
 export const GET_SEARCH_ENTITY_REQUEST = "searchTableActionTypes/GET_SEARCH_ENTITY_REQUEST";

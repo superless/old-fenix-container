@@ -5,7 +5,7 @@ import errorReducer from "./errorReducer";
 import { EntityReducer } from "./EntityReducer";
 
 const rootReducer = combineReducers({
-  entities: EntityReducer,
+  collection: EntityReducer,
   isLoading: isLoadingReducer,
   error: errorReducer
 });

@@ -41,9 +41,7 @@ function TableFenix(props) {
         createElement(Table.Header, null,
             createElement(Table.Row, null,
                 propHeader.map(function (h) { return (createElement(Table.HeaderCell, { key: "p" + h.index, textAlign: 'center' }, h.name)); }),
-                entityHeader.map(function (h) { return (createElement(Table.HeaderCell, { textAlign: 'center', key: "e" + h.index },
-                    h.name,
-                    " deiby cabrera")); }))),
+                entityHeader.map(function (h) { return (createElement(Table.HeaderCell, { textAlign: 'center', key: "e" + h.index }, h.name)); }))),
         createElement(Table.Body, null, entities.map(function (entity) {
             return createElement(Table.Row, { key: entity.Id },
                 propHeader.map(function (h) { return (createElement(Table.Cell, { textAlign: 'center', key: "p" + h.index + "_" + entity.Id },
@@ -54,6 +52,5 @@ function TableFenix(props) {
                     entity.RelatedIds.filter(function (e) { return e.EntityIndex === h.index; }).length > 0 ? entity.RelatedIds.filter(function (e) { return e.EntityIndex === h.index; })[0].name : "")); }));
         }))));
 }
-//# sourceMappingURL=TableFenix.js.map
 
 export { TableFenix };
