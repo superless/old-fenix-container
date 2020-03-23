@@ -100,6 +100,7 @@ var SelectFilter = /** @class */ (function (_super) {
     };
     return SelectFilter;
 }(Component));
+//# sourceMappingURL=SelectFilter.js.map
 
 var SearchFilter = /** @class */ (function (_super) {
     __extends(SearchFilter, _super);
@@ -133,6 +134,7 @@ var SearchFilter = /** @class */ (function (_super) {
     };
     return SearchFilter;
 }(Component));
+//# sourceMappingURL=SearchFilter.js.map
 
 var SearchBase = /** @class */ (function (_super) {
     __extends(SearchBase, _super);
@@ -142,12 +144,13 @@ var SearchBase = /** @class */ (function (_super) {
         _this.handleResultSelect = function (e, data) {
             if (e == null)
                 console.log(e);
-            var value = data.result.id;
             _this.setState(__assign(__assign({}, _this.state), { value: data.result.title }));
             // tslint:disable-next-line:no-unused-expression
             _this.props.elementSelected && _this.props.elementSelected(data.result);
         };
-        _this.handleSearchChange = function (data) {
+        _this.handleSearchChange = function (e, data) {
+            if (e == null)
+                console.log(e);
             var value = data.value;
             _this.setState({ load: true, value: value });
             var re = new RegExp(escapeRegExp(_this.state.value), "i");
@@ -246,6 +249,7 @@ var SearchBase = /** @class */ (function (_super) {
     };
     return SearchBase;
 }(Component));
+//# sourceMappingURL=SearchBase.js.map
 
 function SearchFenix(props) {
     var searchTypes = props.searchTypes, searchTypeSelect = props.searchTypeSelect, loading = props.loading, elementSelected = props.elementSelected, source = props.source, sourceCategory = props.sourceCategory;

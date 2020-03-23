@@ -13,10 +13,6 @@ export function ClientSearch(url: string, key: string) {
 }
 
 
-
-// tengo que 
-//
-
 export function FacetWithProperty(
   url: string,
   key: string,
