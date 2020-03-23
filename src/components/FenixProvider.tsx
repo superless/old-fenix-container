@@ -9,8 +9,8 @@ export default class FenixProvider extends React.Component<IFenixProviderProps> 
   public render() {
     return (
       <Provider store={store}>
-      {this.props.children}
-    </Provider>
+          {this.props.children}
+      </Provider>
     );
   }
 }

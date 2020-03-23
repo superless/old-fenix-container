@@ -145,6 +145,7 @@ var SearchBase = /** @class */ (function (_super) {
             if (e == null)
                 console.log(e);
             _this.setState(__assign(__assign({}, _this.state), { value: data.result.title }));
+            console.log(data.result);
             // tslint:disable-next-line:no-unused-expression
             _this.props.elementSelected && _this.props.elementSelected(data.result);
         };
@@ -273,6 +274,5 @@ function SearchFenix(props) {
         return createElement(SearchBase, { SearchTypeSelect: searchSelected, defaultSearchType: currentSearch, elementSelected: elementSelected, isCategory: true, loading: loading, messageNotFound: currentSearch.messageNotFound || "Elemento no encontrado", placeholder: currentSearch.placeHolder || "Seleccione un elemento", searchTypes: searchTypes, sourceCategory: sourceCategory });
     }
 }
-//# sourceMappingURL=SearchFenix.js.map
 
 export { SearchFenix, TableFenix };

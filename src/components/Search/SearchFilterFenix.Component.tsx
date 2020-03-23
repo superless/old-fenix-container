@@ -43,7 +43,7 @@ function GetSourceModel(src : IFilterState, st:SearchType) : ISearchBaseModel[] 
     if (st.entityType == "selected"){      
         const options = entities.PropertyCollection.get(st.propertyIndex as number) as EntityIndexNameResult[] | undefined;
         if (!options) return null;
-        return options.map(s=>({ title : s.name, description : s.hits?`${s.hits} encontrados`:""  } as ISearchBaseModel));
+        return options.map(s=>({ title : s.name, description : s.hits?`${s.hits} encontrados`:"", id: s.id  } as ISearchBaseModel));
       
     } else {
       const options = entities.PropertyCollection.get(st.propertyIndex as number) as EntityIndexNameCategoryResult[] | undefined;
