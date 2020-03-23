@@ -20,8 +20,7 @@ function* onLoadEntitys({ url, page, search, ElementsInPage, entity, index, key 
 
   try {
 
-    // const thingsFromReduxStore = yield select(state => state.collection);
-
+    
     
  
 
@@ -42,6 +41,8 @@ function* onLoadEntitys({ url, page, search, ElementsInPage, entity, index, key 
     let selectProps = 'RelatedProperties/PropertyIndex,RelatedProperties/Value, Id';
 
     const resultName: IResult = yield call(EntitySearch, url, key, index, page, ElementsInPage, join, search, selectProps);
+
+    
 
     result.entities = result.entities.map(s => {
       var names = resultName.entities.map(i => ({ id: i.Id, name: i.RelatedProperties.filter(f => f.PropertyIndex === 6)[0].Value }));

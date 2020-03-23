@@ -1,3 +1,5 @@
+import { SearchType } from "tf-search-model";
+import { ISearchBaseModel } from "../components/temp_component";
 
 export interface FilterOptionsContainer {
 
@@ -31,12 +33,9 @@ export interface EntityIndexNameResult {
   hits?:number
 }
 
-export interface EntityIndexNameCategoryResult {
-  id: number;
-  name: string;
+export interface EntityIndexNameCategoryResult extends EntityIndexNameResult {
   category: string;
   categoryId : string;
-  hits : string;
 }
 
 export type KindEntity = "Related" | "RelatedCategory";
@@ -51,27 +50,14 @@ export interface IndexEntityName {
 export interface IndexEntityRelatedIdCategory {
   kind: KindEntity;
   propertyIndex: number;
-  entityIndexCategory:number;
-  propertyIndexCategory:number;
-}
-
-export interface SearchType {
-  entityType : TypeEntity;
-  name :string;
-  maxOptions : number;
-  default:boolean;
-  mainEntityIndex? : number; 
-  entitySearchTypeIndex?: number;
-  dataDependant? : boolean;
-  propertyIndex? : number;
-  propertyCategoryIndex? : number;
-  
+  entityIndexCategory?:number;
+  propertyIndexCategory?:number;
 }
 
 
 export interface ResultSelected {  
   searchType: SearchType;
-  value : string;
+  value : ISearchBaseModel;
 }
 
 
@@ -80,4 +66,3 @@ export interface ResultSelected {
  * Entity 
  * 
  */
-export type TypeEntity = "search" | "selected" | "selectedGroup";

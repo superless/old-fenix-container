@@ -1,5 +1,5 @@
-import { SearchType } from "../../base/model/types/SearchType";
-export default interface ISearchFilterSearchProps {
+import { SearchType } from "tf-search-model";
+export default interface ISearchFilterProps {
     searchTypes: SearchType[];
     defaultSearchType: SearchType;
     SearchTypeSelect: (searchTypeIndex: SearchType) => void;

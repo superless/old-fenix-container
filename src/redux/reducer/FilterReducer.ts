@@ -4,22 +4,22 @@ import { FilterOptionsContainer } from "../../model/CategoryEntity";
 
 
 
-export interface IEntityState {
+export interface IFilterState {
   Indexes: Map<number, FilterOptionsContainer>;
   Main? : FilterOptionsContainer;
 
 }
 
-const initialState: IEntityState = {
+const initialState: IFilterState = {
   Indexes: new Map<number, FilterOptionsContainer>()
   
 }
 
 export function FilterReducer(
-  state: IEntityState = initialState,
+  state: IFilterState = initialState,
   action: actions.EntityFilterAction
 
-): IEntityState {
+): IFilterState {
   switch (action.type) {
     case actions.GET_SEARCH_TYPES_SUCCESS:
       if(action.entity){
@@ -27,7 +27,9 @@ export function FilterReducer(
       } else {
         state.Main = action.value;
       }
-      return state;
+      
+      
+      return {...state};
       
     default:
       return state;

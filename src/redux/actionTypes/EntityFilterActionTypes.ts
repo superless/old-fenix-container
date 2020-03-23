@@ -7,7 +7,7 @@ export const GET_SEARCH_TYPES  = "searchFilterActionTypes/GET_SEARCH_TYPES";
 export interface searchTypeInput {
   indexMainEntity?: number,  
   indexFilters:number[]; // los indices que se irán a buscar en el facet.
-  indexEntitySearchType : number; // cual es la entidad que irá a buscar, el indice de la busqueda
+  indexEntitySearchType? : number; // cual es la entidad que irá a buscar, el indice de la busqueda
   searchTypeData : IndexEntityName | IndexEntityRelatedIdCategory;
   maxFacets: number;
 }

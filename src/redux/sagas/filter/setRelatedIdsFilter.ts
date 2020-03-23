@@ -15,12 +15,16 @@ import { emptyContainer } from "./emptyContainer";
  */
 export function setRelatedIdsFilter(prev: FilterOptionsContainer, currentIndex: number, propEntity: number, elements: IEntitySearch[], categoryRelatedIndex?: number): FilterOptionsContainer {
   const currentContainer = prev ?? emptyContainer(currentIndex);
+
+  
   // get the { name: , id:, categoryId:) from Entity
   const options = elements.map(s => ({
     name: s.RelatedProperties.filter(s => s.PropertyIndex === propEntity)[0].Value,
     id: s.Id,
     categoryId: !categoryRelatedIndex ? '' : s.RelatedIds.filter(s => s.EntityIndex === categoryRelatedIndex)[0].EntityId
   }));
+
+  
   const relatedContainer = currentContainer.filterEntities.get(currentIndex) as FilterEntityContainer;
   //initialize depend of category
   relatedContainer.PropertyCollection = categoryRelatedIndex ? new Map<number, EntityIndexNameCategoryResult[]>() : new Map<number, EntityIndexNameResult[]>();

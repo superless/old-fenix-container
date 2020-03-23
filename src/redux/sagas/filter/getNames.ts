@@ -3,28 +3,6 @@ import { EntityIndexNameCategoryResult, IndexEntityRelatedIdCategory } from "../
 import { EntitySearch } from "../../../search/EntitySearch";
 
 
-/**
- * Get the Name of a entity
- * @param index index of the azure search
- * @param key key of azure search
- * @param url url from azure searcj
- * @param entityIndex index of the entity where the query will return the name
- * @param indexProperty index of property of the name
- * @param id id of the entity
- * @returns {Promise<string>} The Name of the identify
- */
-async function getNameFromId(index: string, key: string, url: string, entityIndex: number, indexProperty: number, id: string): Promise<string> {
-
-  // get the entity from search
-  const remoteResult = await EntitySearch(url, key, index, 1, 10, `EntityIndex eq ${entityIndex} and Id eq '${id}'`);
-
-
-  
-  if (remoteResult.total === 0) return "";
-
-  //return the name.
-  return remoteResult.entities[0].RelatedProperties.filter(s => s.PropertyIndex === indexProperty)[0].Value;
-}
 
 
 
@@ -37,15 +15,24 @@ async function getNameFromId(index: string, key: string, url: string, entityInde
  * @param url url from azure
  * @param index index from azure
  */
-export async function getNames(options : EntityIndexNameCategoryResult[], category :IndexEntityRelatedIdCategory, key: string, url: string, index: string): Promise<EntityIndexNameCategoryResult[]>{
-  return Promise.all(options.map(async s => {
+export async function getNames(options : EntityIndexNameCategoryResult[], category :IndexEntityRelatedIdCategory, key: string, url: string, index: string, maxFacets: number): Promise<EntityIndexNameCategoryResult[]>{
 
-    var result = await getNameFromId(index, key, url, category.entityIndexCategory, category.propertyIndexCategory, s.categoryId);
+  const idcategories : string[] = options.map(s=>s.categoryId);
+  const ids : string[] = idcategories.filter((n, i) => idcategories.indexOf(n) === i);
 
-    s.category = result;
+  const join = `RelatedProperties/any(element: element/PropertyIndex eq ${category.propertyIndexCategory}) and (Id eq '${ids.join("' or Id eq '")}')`;
 
-    return s;
-  }))
+  const filter = `EntityIndex eq ${category.entityIndexCategory} and ${join}`;
+  const resultRemote = await EntitySearch(url, key, index, 1, maxFacets, filter,"", "Id, RelatedProperties/Value, RelatedProperties/PropertyIndex");
+  
+  return options.map(o=>{
+    const current = resultRemote.entities.filter(a=>a.Id === o.categoryId )[0];
+
+    o.category = current.RelatedProperties.filter(f=>f.PropertyIndex === category.propertyIndex)[0].Value;
+
+    return o;
+
+  });
 }
 
 

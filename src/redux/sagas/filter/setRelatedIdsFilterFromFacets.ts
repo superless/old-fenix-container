@@ -12,16 +12,25 @@ import { emptyContainer } from "./emptyContainer";
  * @returns {FilterOptionsContainer} Filter Updated with the ids
  */
 export function setRelatedIdsFilterFromFacets(prev: FilterOptionsContainer, currentIndex: number, propEntity: number, facetResult: FacetContainer): FilterOptionsContainer {
+
   // inialize empty if container is null
   const currentContainer = prev ?? emptyContainer(currentIndex);
+
   // get the container of entities (RelatedIds) from the index
   const entityContainer = currentContainer.filterEntities.get(currentIndex) as FilterEntityContainer;
+
   // initialize the property collections if it is null.
   entityContainer.PropertyCollection = entityContainer.PropertyCollection ?? new Map<number, EntityIndexNameResult[]>();
+
+
   // save the facets with the property Index, the facets are the values from propertyId.
   // we set only the value.
   entityContainer.PropertyCollection.set(propEntity, facetResult.facets.map(s => ({ name: s.value, id: s.value } as EntityIndexNameResult)));
+
+
   // set the entity container with the new values
   currentContainer.filterEntities.set(currentIndex, entityContainer);
+
+  
   return currentContainer;
 }

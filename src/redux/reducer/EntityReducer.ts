@@ -20,7 +20,7 @@ export function EntityReducer(
   switch (action.type) {
     case actions.GET_SEARCH_ENTITY_SUCCESS:
       state.Entities.set(action.entity, action.value);      
-      return state;
+      return {...state};
       
     default:
       return state;
