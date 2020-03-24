@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IResult } from 'tf-search-model';
-import { TableFenix} from '../temp_component/index';
+import { TableFenix} from 'fenix-components';
 import { EntityActionAzureInput } from '../../redux/actionTypes/EntityTableActionTypes';
 
 export interface INestedTableFenixProps {
