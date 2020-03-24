@@ -1,13 +1,14 @@
 {
-  "name": "table-fenix",
+  "name": "fenix-provider",
+  "description": "colección de componentes que funcionan como programa independiente, conectados a azure search",
   "version": "1.0.0",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "repository": {
-    "url": "https://github.com/michal-wrzosek/react-component-lib",
+    "url": "https://Trifenix-Agricola-JHM@dev.azure.com/Trifenix-Agricola-JHM/Components/_git/trifenix.search.container",
     "type": "git"
   },
-  "license": "MIT",
+  "license": "TRIFENIX",
   "types": "dist/index.d.ts",
   "devDependencies": {
     "@types/react": "^16.9.13",
@@ -51,14 +52,17 @@
     "test": "ts-node test/test.ts",
     "pretest": "npm run build",
     "test:lint": "eslint ./src/**/*.ts ./src/**/*.tsx",
-    "test:lint:fix": "npm run test:lint -- --fix"
+    "test:lint:fix": "npm run test:lint -- --fix",
+    "vsToken": "vsts-npm-auth -config .npmrc"
   },
   "files": [
     "dist"
   ],
   "dependencies": {
+    "@types/lodash": "^4.14.149",
     "@types/react-redux": "^7.1.7",
     "azure-search": "0.0.21",
-    "tf-search-model": "^1.0.4"
+    "lodash": "^4.17.15",
+    "tf-search-model": "^1.0.10"
   }
 }

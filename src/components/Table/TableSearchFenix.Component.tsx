@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { IResult } from 'tf-search-model';
-import { TableFenix} from './temp_component/index';
+import { TableFenix} from '../temp_component/index';
+import { EntityActionAzureInput } from '../../redux/actionTypes/EntityTableActionTypes';
 
 export interface INestedTableFenixProps {
    urlAzure:string;
@@ -10,13 +11,7 @@ export interface INestedTableFenixProps {
    result : Map<number, IResult> | undefined,
    isLoading: boolean;
   error: Error | string | null;
-   onLoad:(url: string,
-    key: string,
-    index: string,
-    entity: number,
-    page: number,
-    ElementsInPage: number,
-    search: string) => any;
+   onLoad?:(input : EntityActionAzureInput) => void;
     headerRelated:(header:number)=>string;  
     headerProperty:(header:number)=>string;
     
@@ -24,7 +19,7 @@ export interface INestedTableFenixProps {
 
 }
 
-export function NestedTableFenix (props: INestedTableFenixProps) {
+export function TableSearchFenix (props: INestedTableFenixProps) {
   let {urlAzure, azureKey, index, entity, result, isLoading} = props;
   
  
@@ -34,7 +29,17 @@ export function NestedTableFenix (props: INestedTableFenixProps) {
 
     if (props.onLoad){
       
-      props.onLoad(urlAzure,azureKey, index,entity,1,20,"");
+      
+      props.onLoad({
+        url : urlAzure,
+        ElementsInPage: 20,
+        entity,
+        index,
+        key: azureKey,
+        page:1,
+        search:""
+
+      });
     }
     
   },[]);

@@ -1,29 +1,19 @@
-import * as action from "./../actionTypes/EntityActionTypes";
+import * as action from "../actionTypes/EntityTableActionTypes";
 import { IResult } from "tf-search-model";
+import { EntityActionAzureInput } from "../actionTypes/EntityTableActionTypes";
 
 
 
 
 
-export function GetSearchEntity(url: string,
-  key: string,
-  index: string,
-  entity: number,
-  page: number = 1,
-  ElementsInPage: number = 20,
-  search: string = ''
+export function GetSearchEntity(input : EntityActionAzureInput
   ): action.GetSearchEntityAction{
+
+
     
     return {
         type : action.GET_SEARCH_ENTITY,
-        url,
-        key,
-        index,
-        page,
-        entity,
-        ElementsInPage,
-        search,
-        ids:[]
+        ...input
     };
 }
 

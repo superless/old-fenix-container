@@ -1,4 +1,4 @@
-import * as actions from "./../actionTypes/EntityActionTypes";
+import * as actions from "../actionTypes/EntityTableActionTypes";
 import { IResult } from "tf-search-model";
 
 
@@ -14,17 +14,14 @@ const initialState: IEntityState = {
 
 export function EntityReducer(
   state: IEntityState = initialState,
-  action: actions.EntityAction
+  action: actions.EntityTableAction
 
 ): IEntityState {
   switch (action.type) {
     case actions.GET_SEARCH_ENTITY_SUCCESS:
-      state.Entities.set(action.entity, action.value)
+      state.Entities.set(action.entity, action.value);      
+      return {...state};
       
-      return state;
-  
-
-
     default:
       return state;
 

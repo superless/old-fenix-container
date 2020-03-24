@@ -3,11 +3,14 @@ import { combineReducers } from "redux";
 import isLoadingReducer from "./isLoadingReducer";
 import errorReducer from "./errorReducer";
 import { EntityReducer } from "./EntityReducer";
+import { FilterReducer } from "./FilterReducer";
 
 const rootReducer = combineReducers({
-  entities: EntityReducer,
+  collection: EntityReducer,
+  filter : FilterReducer,
   isLoading: isLoadingReducer,
-  error: errorReducer
+  error: errorReducer,
+
 });
 
 
