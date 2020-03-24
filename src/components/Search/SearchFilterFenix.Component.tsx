@@ -4,7 +4,7 @@ import _ from "lodash";
 import { SearchType } from 'tf-search-model';
 import { ResultSelected, FilterOptionsContainer, EntityIndexNameResult, EntityIndexNameCategoryResult, FilterEntityContainer } from '../../model/CategoryEntity';
 import { IFilterState } from '../../redux/reducer/FilterReducer';
-import { SearchFenix, ISearchCategoryModel, ISearchBaseModel} from '../temp_component/index';
+import { SearchFenix, ISearchCategoryModel, ISearchBaseModel} from 'fenix-components';
 
 
 
