@@ -52,7 +52,8 @@
     "test": "ts-node test/test.ts",
     "pretest": "npm run build",
     "test:lint": "eslint ./src/**/*.ts ./src/**/*.tsx",
-    "test:lint:fix": "npm run test:lint -- --fix"
+    "test:lint:fix": "npm run test:lint -- --fix",
+    "vsToken": "vsts-npm-auth -config .npmrc"
   },
   "files": [
     "dist"
