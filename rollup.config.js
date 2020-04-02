@@ -14,11 +14,11 @@ export default [
       { file: pkg.main, format: 'cjs' },
       { file: pkg.module, format: 'esm' },
       // descomentar para generar archivo.
-      // {
-      //   file: './../../agro.web/src/views/Orders/index.js',
-      //   format: 'es',
-      //   banner: '/* eslint-disable */',
-      // },
+      {
+        file: './../../agro.web/src/views/Orders/index.js',
+        format: 'es',
+        banner: '/* eslint-disable */',
+      },
     ],
   },
 ];
