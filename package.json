@@ -1,7 +1,7 @@
 {
   "name": "fenix-provider",
   "description": "colección de componentes que funcionan como programa independiente, conectados a azure search",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "repository": {
@@ -62,10 +62,10 @@
     "@types/lodash": "^4.14.149",
     "@types/react-redux": "^7.1.7",
     "azure-search": "0.0.21",
-    "fenix-components": "^1.0.2",
+    "fenix-components": "^1.1.6",
     "install": "^0.13.0",
     "lodash": "^4.17.15",
-    "npm": "^6.14.3",
-    "tf-search-model": "^1.0.12"
+    "npm": "^6.14.4",
+    "tf-search-model": "^1.1.9"
   }
 }

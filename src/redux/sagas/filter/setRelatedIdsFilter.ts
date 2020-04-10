@@ -19,9 +19,9 @@ export function setRelatedIdsFilter(prev: FilterOptionsContainer, currentIndex: 
   
   // get the { name: , id:, categoryId:) from Entity
   const options = elements.map(s => ({
-    name: s.RelatedProperties.filter(s => s.PropertyIndex === propEntity)[0].Value,
-    id: s.Id,
-    categoryId: !categoryRelatedIndex ? '' : s.RelatedIds.filter(s => s.EntityIndex === categoryRelatedIndex)[0].EntityId
+    name: s.str.filter(s => s.propertyIndex === propEntity)[0].value,
+    id: s.id,
+    categoryId: !categoryRelatedIndex ? '' : s.rel.filter(s => s.entityIndex === categoryRelatedIndex)[0].entityId
   }));
 
   

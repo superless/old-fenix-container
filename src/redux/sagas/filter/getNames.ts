@@ -20,15 +20,16 @@ export async function getNames(options : EntityIndexNameCategoryResult[], catego
   const idcategories : string[] = options.map(s=>s.categoryId);
   const ids : string[] = idcategories.filter((n, i) => idcategories.indexOf(n) === i);
 
-  const join = `RelatedProperties/any(element: element/PropertyIndex eq ${category.propertyIndexCategory}) and (Id eq '${ids.join("' or Id eq '")}')`;
+  const join = `str/any(element: element/propertyIndex eq ${category.propertyIndexCategory}) and (id eq '${ids.join("' or id eq '")}')`;
 
-  const filter = `EntityIndex eq ${category.entityIndexCategory} and ${join}`;
-  const resultRemote = await EntitySearch(url, key, index, 1, maxFacets, filter,"", "Id, RelatedProperties/Value, RelatedProperties/PropertyIndex");
+  const filter = `entityIndex/any(element : element eq ${category.entityIndexCategory}) and ${join}`;
+  const resultRemote = await EntitySearch(url, key, index, 1, maxFacets, filter,"", "id, str/value, str/propertyIndex");
+  
   
   return options.map(o=>{
-    const current = resultRemote.entities.filter(a=>a.Id === o.categoryId )[0];
+    const current = resultRemote.entities.filter(a=>a.id === o.categoryId )[0];
 
-    o.category = current.RelatedProperties.filter(f=>f.PropertyIndex === category.propertyIndex)[0].Value;
+    o.category = current.str.filter(f=>f.propertyIndex === category.propertyIndex)[0].value;
 
     return o;
 

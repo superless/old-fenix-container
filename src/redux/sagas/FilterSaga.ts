@@ -64,8 +64,10 @@ function* getOptionFromSearchType({
     container =  container??emptyContainer(indexRelated);
 
     if (searchTypeData.kind === "RelatedCategory" || (searchTypeData as IndexEntityName).dataDependant) {
-      const facetsResult = yield call(FacetEntitySearch, url, key, index, indexFilters, maxFacets, "RelatedIds", "", indexMainEntity);
+      const facetsResult = yield call(FacetEntitySearch, url, key, index, indexFilters, maxFacets, "rel", "", indexMainEntity);
+      
       const facetTypes = facetsResult as FacetContainer;
+      
       let relatedContainer = container.filterEntities.get(indexRelated) as FilterEntityContainer;
       
       if (relatedContainer.idCollection.length == 0) {
@@ -75,20 +77,19 @@ function* getOptionFromSearchType({
       relatedContainer = container.filterEntities.get(indexRelated) as FilterEntityContainer;
       
 
-      var filterIds = `Id eq '${relatedContainer.idCollection.map(s => s.value).join("' or Id eq '")}'`;
+      var filterIds = `id eq '${relatedContainer.idCollection.map(s => s.value).join("' or id eq '")}'`;
 
       
-      let join = `${filterIds} and  EntityIndex eq ${indexEntitySearchType} and RelatedProperties/any(element : element/PropertyIndex eq ${searchTypeData.propertyIndex})`;
+      let join = `${filterIds} and  entityIndex/any(element : element eq ${indexEntitySearchType}) and str/any(element : element/propertyIndex eq ${searchTypeData.propertyIndex})`;
 
       
-      let select = searchTypeData.kind === "Related" ? 'Id, RelatedProperties/PropertyIndex, RelatedProperties/Value' : "Id, RelatedProperties/PropertyIndex, RelatedProperties/Value, RelatedIds/EntityIndex, RelatedIds/EntityId";
+      let select = searchTypeData.kind === "Related" ? 'id, str/propertyIndex, str/value' : "id, str/propertyIndex, str/value, rel/entityIndex, rel/entityId";
 
 
       
       const resultName: IResult = yield call(EntitySearch,url, key, index, 1, maxFacets, join, "", select);
 
-
-
+      
       if (searchTypeData.kind == "Related") {
 
         container = setRelatedIdsFilter(container, indexRelated, searchTypeData.propertyIndex, resultName.entities);
@@ -117,6 +118,7 @@ function* getOptionFromSearchType({
 
     } else {
       var facets = yield call(FacetWithProperty,url, key, index, indexRelated, searchTypeData.propertyIndex, maxFacets, "");
+      
 
       container = setRelatedIdsFilterFromFacets(container, indexRelated, searchTypeData.propertyIndex, facets);
     }
