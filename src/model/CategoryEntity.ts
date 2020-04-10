@@ -1,5 +1,5 @@
 import { SearchType } from "tf-search-model";
-import { ISearchBaseModel } from "../components/temp_component";
+import { ISearchBaseModel } from "fenix-components";
 
 export interface FilterOptionsContainer {
 
@@ -61,8 +61,3 @@ export interface ResultSelected {
 }
 
 
-
-/**
- * Entity 
- * 
- */

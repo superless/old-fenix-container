@@ -26,17 +26,18 @@ export function FacetWithProperty(
 
   var client = ClientSearch(url, key);
 
-  const filter = extraFilter ===""? `EntityIndex eq ${entity}`:  `EntityIndex eq ${entity} and ${extraFilter}`;
+  const filter = extraFilter ===""? `entityIndex/any(element : element eq ${entity})  `:  `entityIndex/any(element : element eq ${entity}) and ${extraFilter}`;
   
-  const facets = `RelatedProperties/Id, count:${defaultMaxFacets}`;
+  const facets = `str/id, count:${defaultMaxFacets}`;
 
   return new Promise<FacetContainer>((resolve, reject) => {
 
     client.search(index, { search: "", filter: filter, facets: [facets], top: 0, select:"", count: false },
       (err: any, results: [], data: { '@odata.count': number, '@search.facets': any }) => {
 
+  
         if (!results || results) {
-          var facetsLocal = data["@search.facets"]["RelatedProperties/Id"] as Facet[];
+          var facetsLocal = data["@search.facets"]["str/id"] as Facet[];
           var facetsTransform = facetsLocal.map(s => {
             
             var value =split( s.value)
@@ -85,20 +86,20 @@ export function FacetEntitySearch(
   
   indices: number[],
   defaultMaxFacets: number,
-  property : "RelatedIds" | "RelatedProperties" | "RelatedEnumValues",
+  property : "rel" | "str" | "enum",
   filter: string,
   entity?: number
 ): Promise<FacetContainer> {
   var client = ClientSearch(url, key);
 
   var filterLocal:String = filter;
-  var facetsQuery = `${property}/Id, count:${defaultMaxFacets}`;
+  var facetsQuery = `${property}/id, count:${defaultMaxFacets}`;
   if(indices.length>0){
     
     var indexString = indices.map(s => (s.toString()));
-    var filterIndex = `elementId/EntityIndex eq ${indexString.join(" or  elementId/EntityIndex eq ")}`;
-    var entityIndex = entity?` and EntityIndex eq ${entity} `:"";
-    filterLocal = `${filter}  RelatedIds/any(elementId: ${filterIndex} ) ${entityIndex}`;
+    var filterIndex = `elementId/entityIndex eq ${indexString.join(" or  elementId/entityIndex eq ")}`;
+    var entityIndex = entity?` and entityIndex/any(element: element eq ${entity})`:"";
+    filterLocal = `${filter}  rel/any(elementId: ${filterIndex} ) ${entityIndex}`;
 
   }
  
@@ -108,8 +109,9 @@ export function FacetEntitySearch(
     client.search(index, { search: "", filter: filterLocal, facets: [facetsQuery], top: 0, count: true },
       (err: any, results: [], data: { '@odata.count': number, '@search.facets': any }) => {
 
+        
         if (!results || results) {
-          var facetsLocal = data["@search.facets"]["RelatedIds/Id"] as Facet[];
+          var facetsLocal = data["@search.facets"]["rel/id"] as Facet[];
           var facetsTransform = facetsLocal.map(s => {
             
             var value = split(s.value);
@@ -202,9 +204,10 @@ export function EntitySearch(
 
     client.search(index, { search, filter: query, top: ElementsInPage, skip: skip_data, count: true, select },
       (err: any, result: IEntitySearch[], data: { '@odata.count': number }) => {
+       
         if (err) reject(err);
 
-        resolve({ entities: result, total: data["@odata.count"], currentPage: page })
+        resolve({ entities: result, total: data["@odata.count"], current: page })
       }
 
     );
