@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { searchTypeAzureInput } from '../../redux/actionTypes/EntityFilterActionTypes';
 import _ from "lodash";
-import { SearchType } from 'tf-search-model';
+import { ISearchType, TypeEntity } from 'tf-search-model';
 import { ResultSelected, FilterOptionsContainer, EntityIndexNameResult, EntityIndexNameCategoryResult, FilterEntityContainer } from '../../model/CategoryEntity';
 import { IFilterState } from '../../redux/reducer/FilterReducer';
-import { SearchFenix, ISearchCategoryModel, ISearchBaseModel } from 'fenix-components';
+import { SearchFenix, ISearchCategoryModel, ISearchBaseModel } from './../temp_component/index';
 import { ctxt } from "./../FenixProvider";
 import { AzureInput } from '../../redux/actionTypes/AzureInput';
 
 
 
 export interface ISearchFilterFenixProps {
-  searchTypes: SearchType[];
+  searchTypes: ISearchType[];
   onSelect: (input: searchTypeAzureInput) => void;
   isLoading: boolean;
   error: string | Error | null;
@@ -20,8 +20,11 @@ export interface ISearchFilterFenixProps {
 }
 
 
-function GetSourceModel(src: IFilterState, st: SearchType): ISearchBaseModel[] | ISearchCategoryModel[] | null {
-  if (st.entityType === "search") return null;
+function GetSourceModel(src: IFilterState, st: ISearchType): ISearchBaseModel[] | ISearchCategoryModel[] | null {
+  if (st.entityType == TypeEntity.SEARCH) return null;
+
+  
+
   let container: FilterOptionsContainer;
 
   if (st.mainEntityIndex && src.Indexes) {
@@ -39,7 +42,7 @@ function GetSourceModel(src: IFilterState, st: SearchType): ISearchBaseModel[] |
   let entities: FilterEntityContainer | undefined = container.filterEntities.get(st.entitySearchTypeIndex as number);
   if (!entities) return null;
   if (!entities.PropertyCollection) return null;
-  if (st.entityType == "selected") {
+  if (st.entityType == TypeEntity.SELECTED) {
     const options = entities.PropertyCollection.get(st.propertyIndex as number) as EntityIndexNameResult[] | undefined;
     if (!options) return null;
     return options.map(s => ({ title: s.name, description: s.hits ? `${s.hits} encontrados` : "", id: s.id } as ISearchBaseModel));
@@ -68,16 +71,16 @@ export default function SearchFilterFenix(props: ISearchFilterFenixProps) {
 
 
   let { searchTypes, onSelect, isLoading, error, resultSelected, source } = props;
-  const [currentSearchType, setCurrentSearchType] = React.useState(searchTypes[0] as SearchType);
+  const [currentSearchType, setCurrentSearchType] = React.useState(searchTypes[0] as ISearchType);
 
 
   const model = GetSourceModel(source, currentSearchType);
 
 
-  const searchSelected: (src: SearchType, azr:AzureInput) => void = (src, azr) => {
+  const searchSelected: (src: ISearchType, azr:AzureInput) => void = (src, azr) => {
     setCurrentSearchType(src);
 
-    if (src.entityType != "search") {
+    if (src.entityType != TypeEntity.SEARCH) {
       onSelect(
         {
           index :azr.index,
@@ -89,7 +92,7 @@ export default function SearchFilterFenix(props: ISearchFilterFenixProps) {
           searchTypeData: {
             dataDependant: src.dataDependant,
             entityIndexCategory: src.categoryIndex,
-            kind: src.entityType == "selectedGroup" ? "RelatedCategory" : "Related",
+            kind: src.entityType == TypeEntity.SELECTED_GROUP ? "RelatedCategory" : "Related",
             propertyIndex: src.propertyIndex || 6,
             propertyIndexCategory: src.propertyCategoryIndex || 6
           },
@@ -111,8 +114,8 @@ export default function SearchFilterFenix(props: ISearchFilterFenixProps) {
       {context =>
         context && (
           <SearchFenix elementSelected={elementselected} loading={isLoading} searchTypeSelect={(s)=>searchSelected(s, context.searchConnect)} searchTypes={searchTypes}
-            source={currentSearchType.entityType == "selected" ? model as ISearchBaseModel[] : undefined}
-            sourceCategory={currentSearchType.entityType == "selectedGroup" ? model as ISearchCategoryModel[] : undefined}
+            source={currentSearchType.entityType == TypeEntity.SELECTED ? model as ISearchBaseModel[] : undefined}
+            sourceCategory={currentSearchType.entityType == TypeEntity.SELECTED_GROUP ? model as ISearchCategoryModel[] : undefined}
           />
         )
 

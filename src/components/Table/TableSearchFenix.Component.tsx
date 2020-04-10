@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { IResult } from 'tf-search-model';
-import { TableFenix} from 'fenix-components';
+import { IResult, Related } from 'tf-search-model';
+import { TableFenix} from './../temp_component/index';
 import { EntityActionAzureInput } from '../../redux/actionTypes/EntityTableActionTypes';
 import { ctxt } from "./../FenixProvider";
 
@@ -13,7 +13,7 @@ export interface INestedTableFenixProps {
   error: Error | string | null;
    onLoad?:(input : EntityActionAzureInput) => void;
     headerRelated:(header:number)=>string;  
-    headerProperty:(header:number)=>string;
+    headerProperty:(header:number, typeRelated: Related)=>string;
     
     
 
@@ -49,6 +49,8 @@ export function TableSearchFenix (props: INestedTableFenixProps) {
               });
               setLoaded(true);
             }
+
+            
             
             return <TableFenix  elements = {result?.get(entity)} loading={isLoading} headerProperty={props.headerProperty} headerRelated={props.headerRelated} />
           }
