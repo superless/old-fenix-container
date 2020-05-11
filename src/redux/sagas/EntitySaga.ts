@@ -5,7 +5,7 @@ import * as actionTypes from "../actionTypes/EntityTableActionTypes";
 
 
 import { EntitySearch } from "./../../search/EntitySearch";
-import { IResult } from "tf-search-model";
+import { IResult } from "@fenix/tf-search-model";
 
 
 

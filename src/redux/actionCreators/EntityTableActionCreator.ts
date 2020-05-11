@@ -1,5 +1,5 @@
 import * as action from "../actionTypes/EntityTableActionTypes";
-import { IResult } from "tf-search-model";
+import { IResult } from "@fenix/tf-search-model";
 import { EntityActionAzureInput } from "../actionTypes/EntityTableActionTypes";
 
 

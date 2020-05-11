@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { IResult, Related } from 'tf-search-model';
-import { TableFenix} from 'fenix-components';
+import { IResult, Related } from '@fenix/tf-search-model';
+import { TableFenix} from '@fenix/fenix-components';
 import { EntityActionAzureInput } from '../../redux/actionTypes/EntityTableActionTypes';
 import { ctxt } from "./../FenixProvider";
 

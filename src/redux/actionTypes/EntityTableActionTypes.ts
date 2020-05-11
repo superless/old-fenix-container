@@ -1,4 +1,4 @@
-import { IResult } from "tf-search-model";
+import { IResult } from "@fenix/tf-search-model";
 import { AzureInput } from "./AzureInput";
 
 export const GET_SEARCH_ENTITY = "searchTableActionTypes/GET_SEARCH_ENTITY";

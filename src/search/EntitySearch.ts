@@ -1,4 +1,4 @@
-import { IEntitySearch, IResult } from "tf-search-model";
+import { IEntitySearch, IResult } from "@fenix/tf-search-model";
 import { Facet, FacetContainer } from "../model/CategoryEntity";
 
 
