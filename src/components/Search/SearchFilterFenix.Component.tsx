@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { searchTypeAzureInput } from '../../redux/actionTypes/EntityFilterActionTypes';
 import _ from "lodash";
-import { ISearchType, TypeEntity } from 'tf-search-model';
+import { ISearchType, TypeEntity } from '@fenix/tf-search-model';
 import { ResultSelected, FilterOptionsContainer, EntityIndexNameResult, EntityIndexNameCategoryResult, FilterEntityContainer } from '../../model/CategoryEntity';
 import { IFilterState } from '../../redux/reducer/FilterReducer';
-import { SearchFenix, ISearchCategoryModel, ISearchBaseModel } from 'fenix-components';
+import { SearchFenix, ISearchCategoryModel, ISearchBaseModel } from '@fenix/fenix-components';
 import { ctxt } from "./../FenixProvider";
 import { AzureInput } from '../../redux/actionTypes/AzureInput';
 

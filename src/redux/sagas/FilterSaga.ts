@@ -4,7 +4,7 @@ import { FacetWithProperty, EntitySearch, FacetEntitySearch } from "../../search
 import * as actionFilterCreators from "../actionCreators/EntityFilterActionCreator";
 import * as actionFilterTypes from "../actionTypes/EntityFilterActionTypes";
 
-import { IResult } from "tf-search-model";
+import { IResult } from "@fenix/tf-search-model";
 
 import { getNames } from "./filter/getNames";
 import { setIdsFilterOptionsContainer } from "./filter/setIdsFilterOptionsContainer";

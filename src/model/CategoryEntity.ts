@@ -1,5 +1,5 @@
-import { SearchType } from "tf-search-model";
-import { ISearchBaseModel } from "fenix-components";
+import { SearchType } from "@fenix/tf-search-model";
+import { ISearchBaseModel } from "@fenix/fenix-components";
 
 export interface FilterOptionsContainer {
 

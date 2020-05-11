@@ -1,5 +1,5 @@
 import { FilterEntityContainer, FilterOptionsContainer, EntityIndexNameCategoryResult, EntityIndexNameResult } from "../../../model/CategoryEntity";
-import { IEntitySearch } from "tf-search-model";
+import { IEntitySearch } from "@fenix/tf-search-model";
 import { emptyContainer } from "./emptyContainer";
 
 
