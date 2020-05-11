@@ -113,7 +113,7 @@ export default function SearchFilterFenix(props: ISearchFilterFenixProps) {
     <ctxt.Consumer>
       {context =>
         context && (
-          <SearchFenix elementSelected={elementselected} loading={isLoading} searchTypeSelect={(s)=>searchSelected(s, context.searchConnect)} searchTypes={searchTypes}
+          <SearchFenix elementSelected={elementselected} loading={isLoading} searchTypeSelect={(s)=>searchSelected(s, context.connect.searchConnect)} searchTypes={searchTypes}
             source={currentSearchType.entityType == TypeEntity.SELECTED ? model as ISearchBaseModel[] : undefined}
             sourceCategory={currentSearchType.entityType == TypeEntity.SELECTED_GROUP ? model as ISearchCategoryModel[] : undefined}
           />
