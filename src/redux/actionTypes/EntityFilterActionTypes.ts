@@ -1,5 +1,5 @@
 import { IndexEntityName, IndexEntityRelatedIdCategory, FilterOptionsContainer } from "../../model/CategoryEntity";
-import { AzureInput } from "./AzureInput";
+import AzureInput from "../../model/connection/AzureInput";
 
 
 export const GET_SEARCH_TYPES  = "searchFilterActionTypes/GET_SEARCH_TYPES";

@@ -6,7 +6,8 @@ import { ResultSelected, FilterOptionsContainer, EntityIndexNameResult, EntityIn
 import { IFilterState } from '../../redux/reducer/FilterReducer';
 import { SearchFenix, ISearchCategoryModel, ISearchBaseModel } from '@fenix/fenix-components';
 import { ctxt } from "./../FenixProvider";
-import { AzureInput } from '../../redux/actionTypes/AzureInput';
+import AzureInput from '../../model/connection/AzureInput';
+
 
 
 
