@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import * as tableTypes from "../../redux/actionTypes/TableFenix";
 import {TableSearchFenix} from "./TableSearchFenix.Component";
-import { AppState } from "../../redux/reducer/rootReducer";
 
 import { GetTableData } from "../../redux/actionCreators/TableFenix";
 import { ITableInputConnect } from "../../model/TableFenix/input";
@@ -17,7 +16,7 @@ const mapDispatchProps = (dispatch:Dispatch<tableTypes.ITableReduxGetData>) =>(
   }
 );
 
-const mapStateProps = (state : AppState) =>{
+const mapStateProps = (state : any) =>{
   
   return {
     result : state.collection.Entities,
