@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IResult, Related } from '@fenix/tf-search-model';
+import { IResult, Related, IEntitySearch } from '@fenix/tf-search-model';
 import { TableFenix} from '@fenix/fenix-components';
 import { ctxt, IFenixStoreElement } from "./../FenixProvider";
 import { ITableInputConnect } from '../../model/TableFenix/input';
@@ -15,6 +15,8 @@ export interface INestedTableFenixProps {
     onLoad?:(input : ITableInputConnect) => void;     
     headerRelated:(header:number)=>string;  
     headerProperty:(header:number, typeRelated: Related)=>string;
+    cellheaders? :JSX.Element[];
+    cells?: ((elem:IEntitySearch)=>JSX.Element)[];
 }
 
 export function TableSearchFenix (props: INestedTableFenixProps) {
@@ -57,7 +59,7 @@ export function TableSearchFenix (props: INestedTableFenixProps) {
 
             
             
-            return <TableFenix selectPage={i=>selectPage(i, context)} itemPerPage = {props.itemPerPage}  elements = {result?result[entity]:undefined} loading={isLoading} headerProperty={props.headerProperty} headerRelated={props.headerRelated} />
+            return <TableFenix cellheaders={props.cellheaders} cells={props.cells} selectPage={i=>selectPage(i, context)} itemPerPage = {props.itemPerPage}  elements = {result?result[entity]:undefined} headerProperty={props.headerProperty} headerRelated={props.headerRelated} />
           }
 
           
