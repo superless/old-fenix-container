@@ -1,3 +1,3 @@
-import GetIdRelations from "./getIdRelations";
+import GetIdRelations from "./GetIdRelations";
 
 export {GetIdRelations};
