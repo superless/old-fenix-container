@@ -1,23 +1,28 @@
 import * as React from 'react';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import store from '../redux/store/domainStore';
-import { AzureInput } from '../redux/actionTypes/AzureInput';
+import AzureInput from '../model/connection/AzureInput';
 
 export interface IFenixProviderProps {
   searchConnect: AzureInput
 }
 
-export const  ctxt = React.createContext<IFenixProviderProps | null>(null);
+export interface IFenixStoreElement {
+  connect : IFenixProviderProps,
+  loadedTableComponent : Map<number, boolean>;
+}
+
+export const  ctxt = React.createContext<IFenixStoreElement | null>(null);
 
 
 export class FenixProvider extends React.Component<IFenixProviderProps> {
   public render() {
     return (
-      <Provider store={store}>
-          <ctxt.Provider value={this.props}>
-          {this.props.children}
-          </ctxt.Provider>
-      </Provider>
+      <ctxt.Provider value={{connect : this.props, loadedTableComponent : new Map<number, boolean>()}}>
+        <Provider store={store}>
+            {this.props.children}
+        </Provider>
+      </ctxt.Provider>
     );
   }
 }

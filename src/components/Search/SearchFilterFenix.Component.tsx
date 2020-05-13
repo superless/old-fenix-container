@@ -6,7 +6,8 @@ import { ResultSelected, FilterOptionsContainer, EntityIndexNameResult, EntityIn
 import { IFilterState } from '../../redux/reducer/FilterReducer';
 import { SearchFenix, ISearchCategoryModel, ISearchBaseModel } from '@fenix/fenix-components';
 import { ctxt } from "./../FenixProvider";
-import { AzureInput } from '../../redux/actionTypes/AzureInput';
+import AzureInput from '../../model/connection/AzureInput';
+
 
 
 
@@ -113,7 +114,7 @@ export default function SearchFilterFenix(props: ISearchFilterFenixProps) {
     <ctxt.Consumer>
       {context =>
         context && (
-          <SearchFenix elementSelected={elementselected} loading={isLoading} searchTypeSelect={(s)=>searchSelected(s, context.searchConnect)} searchTypes={searchTypes}
+          <SearchFenix elementSelected={elementselected} loading={isLoading} searchTypeSelect={(s)=>searchSelected(s, context.connect.searchConnect)} searchTypes={searchTypes}
             source={currentSearchType.entityType == TypeEntity.SELECTED ? model as ISearchBaseModel[] : undefined}
             sourceCategory={currentSearchType.entityType == TypeEntity.SELECTED_GROUP ? model as ISearchCategoryModel[] : undefined}
           />

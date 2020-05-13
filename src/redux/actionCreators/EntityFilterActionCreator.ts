@@ -1,5 +1,5 @@
 import * as actions from "../actionTypes/EntityFilterActionTypes";
-import {  IndexEntityName, IndexEntityRelatedIdCategory, FilterOptionsContainer } from "../../model/CategoryEntity";
+import {  FilterOptionsContainer } from "../../model/CategoryEntity";
 import { searchTypeAzureInput } from "../actionTypes/EntityFilterActionTypes";
 
 
