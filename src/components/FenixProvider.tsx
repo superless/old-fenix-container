@@ -22,7 +22,7 @@ export class FenixProvider extends React.Component<IFenixProviderProps> {
    *
    */
   constructor(props : IFenixProviderProps) {
-    super({...props, isStore : false});
+    super({...props, isStore : true});
 
   }
   public render() {
