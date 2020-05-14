@@ -2,12 +2,10 @@ import IEntityState from "./IEntityTableState";
 import { IResult } from "@fenix/tf-search-model";
 import {TableActionTypes, GET_TABLE_SUCCESS} from "../../actionTypes/TableFenix"
 
-const initialState: IEntityState = {
-  Entities: {},
-}
 
 
-export default function EntityTableReducer(state: IEntityState = initialState, action: TableActionTypes): IEntityState {
+
+export default function EntityTableReducer(state: any = {Entities: {}}, action: TableActionTypes): any {
   switch (action.type) {
     case GET_TABLE_SUCCESS:
       
