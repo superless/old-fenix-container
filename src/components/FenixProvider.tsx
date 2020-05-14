@@ -5,7 +5,7 @@ import AzureInput from '../model/connection/AzureInput';
 
 export interface IFenixProviderProps {
   searchConnect: AzureInput,
-  isStore:boolean
+  isStore: boolean
 }
 
 export interface IFenixStoreElement {
@@ -18,23 +18,21 @@ export const  ctxt = React.createContext<IFenixStoreElement | null>(null);
 
 export class FenixProvider extends React.Component<IFenixProviderProps> {
 
-  /**
-   *
-   */
-  constructor(props : IFenixProviderProps) {
-    super({...props, isStore : true});
-
-  }
+  public static defaultProps = {
+    isStore: true
+};
   public render() {
-    return (
-      this.props.isStore?<ctxt.Provider value={{connect : this.props, loadedTableComponent : new Map<number, boolean>()}}>
+    return this.props.isStore?(
+      <ctxt.Provider value={{connect : this.props, loadedTableComponent : new Map<number, boolean>()}}>
         <Provider store={store}>
             {this.props.children}
         </Provider>
-      </ctxt.Provider>:
+      </ctxt.Provider>
+    ):
+    (
       <ctxt.Provider value={{connect : this.props, loadedTableComponent : new Map<number, boolean>()}}>
-          {this.props.children}
-    </ctxt.Provider>
+            {this.props.children}
+      </ctxt.Provider>
     );
   }
 }
