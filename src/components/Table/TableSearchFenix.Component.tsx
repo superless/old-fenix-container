@@ -12,6 +12,7 @@ export interface INestedTableFenixProps {
     itemPerPage : number;
     error: Error | string | null;
     propIndexName: number,
+    enumValue:(indexEnun:number, valueEnum: number )=>string;
     onLoad?:(input : ITableInputConnect) => void;     
     headerRelated:(header:number)=>string;  
     headerProperty:(header:number, typeRelated: Related)=>string;
@@ -59,7 +60,7 @@ export function TableSearchFenix (props: INestedTableFenixProps) {
 
             
             
-            return <TableFenix cellheaders={props.cellheaders} cells={props.cells} selectPage={i=>selectPage(i, context)} itemPerPage = {props.itemPerPage}  elements = {result?result[entity]:undefined} headerProperty={props.headerProperty} headerRelated={props.headerRelated} />
+            return <TableFenix enumValue={props.enumValue} cellheaders={props.cellheaders} cells={props.cells} selectPage={i=>selectPage(i, context)} itemPerPage = {props.itemPerPage}  elements = {result?result[entity]:undefined} headerProperty={props.headerProperty} headerRelated={props.headerRelated} />
           }
 
           
