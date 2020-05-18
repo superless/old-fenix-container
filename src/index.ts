@@ -7,4 +7,6 @@ import isLoadingReducer from './redux/reducer/isLoadingReducer';
 import errorReducer from './redux/reducer/errorReducer';
 
 
+
+// muestra integración contínua.
 export { TableSearchFenix, FenixProvider,  SearchFilterFenix, watchOnLoadTable, EntityTableReducer, isLoadingReducer, errorReducer};
