@@ -32,7 +32,6 @@ export function TableSearchFenix (props: INestedTableFenixProps) {
       key: c.connect.searchConnect.key,
       page:it,
       propIndexName : props.propIndexName
-
     });
   }
 
@@ -61,7 +60,7 @@ export function TableSearchFenix (props: INestedTableFenixProps) {
 
             
             
-            return <TableFenix filter={props.filter || false} enumValue={props.enumValue} cellheaders={props.cellheaders} cells={props.cells} selectPage={i=>selectPage(i, context)} itemPerPage = {props.itemPerPage}  elements = {result?result[entity]:undefined} headerProperty={props.headerProperty} headerRelated={props.headerRelated} />
+            return <TableFenix  filter={props.filter || false} enumValue={props.enumValue} cellheaders={props.cellheaders} cells={props.cells} selectPage={i=>selectPage(i, context)} itemPerPage = {props.itemPerPage}  elements = {result?result[entity]:undefined} headerProperty={props.headerProperty} headerRelated={props.headerRelated} />
           }
 
           
