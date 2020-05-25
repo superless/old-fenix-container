@@ -27,8 +27,7 @@ const mapStateProps = (state : any) =>{
 
 export default connect(
   mapStateProps,
-  mapDispatchProps
-  
+  mapDispatchProps  
 )(TableSearchFenix);
 
 

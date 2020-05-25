@@ -18,6 +18,7 @@ export interface INestedTableFenixProps {
     headerProperty:(header:number, typeRelated: Related)=>string;
     cellheaders? :JSX.Element[];
     cells?: ((elem:IEntitySearch)=>JSX.Element)[];
+    filter?:boolean;
 }
 
 export function TableSearchFenix (props: INestedTableFenixProps) {
@@ -60,7 +61,7 @@ export function TableSearchFenix (props: INestedTableFenixProps) {
 
             
             
-            return <TableFenix enumValue={props.enumValue} cellheaders={props.cellheaders} cells={props.cells} selectPage={i=>selectPage(i, context)} itemPerPage = {props.itemPerPage}  elements = {result?result[entity]:undefined} headerProperty={props.headerProperty} headerRelated={props.headerRelated} />
+            return <TableFenix filter={props.filter || false} enumValue={props.enumValue} cellheaders={props.cellheaders} cells={props.cells} selectPage={i=>selectPage(i, context)} itemPerPage = {props.itemPerPage}  elements = {result?result[entity]:undefined} headerProperty={props.headerProperty} headerRelated={props.headerRelated} />
           }
 
           
