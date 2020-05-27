@@ -2,6 +2,10 @@ import ITableReduxGetData from "./ITableReduxGetData";
 import ITableReduxRequest from "./ITableReduxRequest";
 import  ITableReduxSuccess  from "./ITableReduxSuccess";
 import  ITableReduxFailure  from "./ITableReduxFailure";
+import ITableReduxFilterFailure from "./ITableReduxFilterFailure";
+import ITableReduxFilterGetData from "./ITableReduxFilterGetData";
+import ITableReduxFilterRequest from "./ITableReduxFilterRequest";
+import ITableReduxFilterSuccess from "./ITableReduxFilterSuccess";
 
 
 /**
@@ -26,6 +30,18 @@ export const GET_TABLE_SUCCESS = "@table-fenix/GET_TABLE_SUCCESS";
  */
 export const GET_TABLE_FAILURE = "@table-fenix/GET_TABLE_FAILURE";
 
+
+export const GET_FILTER_TABLE = "@table-fenix/GET_FILTER_TABLE";
+
+
+export const GET_FILTER_TABLE_SUCCESS = "@table-fenix/GET_FILTER_TABLE_SUCCESS";
+
+export const GET_FILTER_TABLE_REQUEST = "@table-fenix/GET_FILTER_TABLE_REQUEST";
+
+export const GET_FILTER_TABLE_FAILURE = "@table-fenix/GET_FILTER_TABLE_FAILURE";
+
+
+
 /**
  * Action Types de la tabla
  */
@@ -34,6 +50,10 @@ export type TableActionTypes =
    |  ITableReduxRequest
    |  ITableReduxSuccess
    | ITableReduxFailure
+   | ITableReduxFilterFailure
+   | ITableReduxFilterGetData
+   | ITableReduxFilterRequest
+   | ITableReduxFilterSuccess
 
 /**
  * Tipos de datos.
@@ -42,6 +62,10 @@ export {
   ITableReduxGetData,
   ITableReduxRequest,
   ITableReduxSuccess,
-  ITableReduxFailure
+  ITableReduxFailure,
+  ITableReduxFilterFailure,
+  ITableReduxFilterGetData,
+  ITableReduxFilterRequest,
+  ITableReduxFilterSuccess
   
 }

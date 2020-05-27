@@ -1,5 +1,5 @@
 import { ITableInputConnect, ITableInput } from "../../../model/TableFenix/input";
-import { IResult, IEntitySearch } from "@fenix/tf-search-model";
+import { IResult, IEntitySearch, IFacet } from "@fenix/tf-search-model";
 import { TableQuery } from "../../queries";
 import { searchClient} from "./../search";
 

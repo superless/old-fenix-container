@@ -1,14 +1,14 @@
-import { ISearchType } from "@fenix/tf-search-model";
+
 // stages
+
+import IBaseInput from "./IBaseInput";
+import { IFilterModel } from "@fenix/tf-search-model"
+
 /**
  * Evento de carga de datos de la tabla
  */
-export default interface ITableInput {
-  /**
-   * Entidad de la tabla.
-   *
-   */
-  entity: number;
+export default interface ITableInput extends IBaseInput {
+  
   /**
    * página a cargar
    */
@@ -19,13 +19,8 @@ export default interface ITableInput {
    */
   elementsInPage: number;
 
-  /**
-   * busqueda en la tabla
-   */
-  searchType?: ISearchType;
 
-  /**
-   * índice del nombre en las entidades relacionadas
-   */
-  propIndexName: number;
+  pathname:string;
 }
+
+

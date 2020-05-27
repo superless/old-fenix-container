@@ -3,13 +3,13 @@ import { Dispatch } from "redux";
 import * as tableTypes from "../../redux/actionTypes/TableFenix";
 import {TableSearchFenix} from "./TableSearchFenix.Component";
 
-import { GetTableData } from "../../redux/actionCreators/TableFenix";
-import { ITableInputConnect } from "../../model/TableFenix/input";
+import { GetTableFilterData } from "../../redux/actionCreators/TableFenix";
+import { ITableInputConnect, ITableFilterInputConnect } from "../../model/TableFenix/input";
 
-const mapDispatchProps = (dispatch:Dispatch<tableTypes.ITableReduxGetData>) =>(
+const mapDispatchProps = (dispatch:Dispatch<tableTypes.ITableReduxFilterGetData>) =>(
   {
-    onLoad: (input: ITableInputConnect) =>{        
-        dispatch(GetTableData(input))
+    onLoad: (input: ITableFilterInputConnect) =>{        
+        dispatch(GetTableFilterData(input))
       },
    
 
@@ -17,11 +17,10 @@ const mapDispatchProps = (dispatch:Dispatch<tableTypes.ITableReduxGetData>) =>(
 );
 
 const mapStateProps = (state : any) =>{
-  
   return {
     result : state.collection.Entities,
-    isLoading: state.isLoading[tableTypes.GET_TABLE_DATA] ,
-    error: state.error[tableTypes.GET_TABLE_DATA] 
+    isLoading: state.isLoading[tableTypes.GET_FILTER_TABLE] ,
+    error: state.error[tableTypes.GET_FILTER_TABLE] 
   }
 }
 

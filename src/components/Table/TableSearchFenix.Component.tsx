@@ -1,19 +1,21 @@
 import * as React from 'react';
-import { IResult, Related, IEntitySearch } from '@fenix/tf-search-model';
+import { IResult, Related, IEntitySearch, IFacet } from '@fenix/tf-search-model';
 import { TableFenix} from '@fenix/fenix-components';
 import { ctxt, IFenixStoreElement } from "./../FenixProvider";
-import { ITableInputConnect } from '../../model/TableFenix/input';
+import { ITableFilterInputConnect } from '../../model/TableFenix/input';
+import { IEntityNameId } from '@fenix/fenix-components/dist/components/Table/base/model';
 
 
 export interface INestedTableFenixProps { 
     entity:number;
-    result : {[num:number]:IResult} | undefined,
+    result : {[pathname:string]:{[num:number]:IResult}} | undefined,
     isLoading: boolean;
     itemPerPage : number;
     error: Error | string | null;
     propIndexName: number,
+    pathName:string,
     enumValue:(indexEnun:number, valueEnum: number )=>string;
-    onLoad?:(input : ITableInputConnect) => void;     
+    onLoad?:(input : ITableFilterInputConnect) => void;     
     headerRelated:(header:number)=>string;  
     headerProperty:(header:number, typeRelated: Related)=>string;
     cellheaders? :JSX.Element[];
@@ -31,12 +33,14 @@ export function TableSearchFenix (props: INestedTableFenixProps) {
       index : c.connect.searchConnect.index,
       key: c.connect.searchConnect.key,
       page:it,
-      propIndexName : props.propIndexName
+      propIndexName : props.propIndexName,
+      pathname : props.pathName,
+      filter : {}
     });
   }
 
   
-
+console.log(result);
   return (
 
     <ctxt.Consumer>
@@ -53,14 +57,25 @@ export function TableSearchFenix (props: INestedTableFenixProps) {
                 index : context.connect.searchConnect.index,
                 key: context.connect.searchConnect.key,
                 page:1,
-                propIndexName : props.propIndexName
+                propIndexName : props.propIndexName,
+                pathname : props.pathName,
+                filter : {}
               });
               context.loadedTableComponent.set(entity, true);
             }
 
             
+
             
-            return <TableFenix  filter={props.filter || false} enumValue={props.enumValue} cellheaders={props.cellheaders} cells={props.cells} selectPage={i=>selectPage(i, context)} itemPerPage = {props.itemPerPage}  elements = {result?result[entity]:undefined} headerProperty={props.headerProperty} headerRelated={props.headerRelated} />
+            const resultState = result?result[props.pathName]?result[props.pathName][entity]?result[props.pathName][entity]:undefined:undefined:undefined;
+            var facetFilter = resultState?.facets && resultState?.facets
+            .reduce((p:{[num:number]:IEntityNameId[]}, u) => ({
+                ...p,
+                [u.index]: [...(p[u.index] || []), { index : u.value, title : u.title } as IEntityNameId]
+              }),{});
+
+            
+            return <TableFenix filtersValues={facetFilter}  filter={props.filter || false} enumValue={props.enumValue} cellheaders={props.cellheaders} cells={props.cells} selectPage={i=>selectPage(i, context)} itemPerPage = {props.itemPerPage}  elements = {resultState} headerProperty={props.headerProperty} headerRelated={props.headerRelated}  />
           }
 
           

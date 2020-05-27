@@ -8,4 +8,5 @@ export default interface ITableReduxSuccess {
   type: typeof GET_TABLE_SUCCESS;
   value: IResult;
   entity: number;
+  pathname:string;
 }
