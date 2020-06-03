@@ -26,6 +26,7 @@ export function* onLoadTable(input: ITableInputConnect) {
     const tableResultNames: IResult = {
       current: tableResult.current,
       total: tableResult.total,
+      indexPropName : input.propIndexName,
       entities: tableResult.entities.map(s => ({
         ...s,
         rel: s.rel.map(r => ({ ...r, name: names[r.entityIndex].some(f => f.id === r.entityId) ? names[r.entityIndex].filter(f => f.id === r.entityId)[0].name : "" }))

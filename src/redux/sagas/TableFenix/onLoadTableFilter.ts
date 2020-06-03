@@ -51,7 +51,8 @@ export function* onLoadTableFilter(input: ITableFilterInputConnect) {
         rel: s.rel.map(r => ({ ...r, name: names[r.entityIndex].some(f => f.id === r.entityId) ? names[r.entityIndex].filter(f => f.id === r.entityId)[0].name : "" }))
       })),
       filter: input.filter,
-      facets: facetsFinal
+      facets: facetsFinal,
+      indexPropName : input.propIndexName
     };
     
     yield put(tableEvents.GetTableFilterSuccess(tableResultNames, input.entity, input.pathname));

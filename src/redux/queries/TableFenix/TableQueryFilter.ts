@@ -13,15 +13,13 @@ const TableQueryFilter : (input: ITableFilterInput)=>ISearchQuery = input=>{
 }
 
 function getFilter(filter : IFilterModel):string {
-
+  
   if (!filter.filterEntity) return "";
-
   var filtered  = Object.keys(filter.filterEntity);
   if (filtered.length === 0) return "";
 
   var strs = filtered
-    .map(s=>`(rel/any(element:element/entityIndex eq ${s}) and 
-        rel/any(rel: rel/entityId/any(entid : search.in(entid, '${filter.filterEntity![Number(s)].map(a=>a.value).join(",")}'))))`);
+    .map(s=>`(rel/any(element:element/entityIndex eq ${s} and search.in(element/entityId, '${filter.filterEntity![Number(s)].map(a=>a.value).join(",")}')))`);
   
   return ` and ${strs.join(" and ")}`;
 }

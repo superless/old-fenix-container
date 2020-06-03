@@ -24,7 +24,7 @@ const GetTableFilterSearch : (input : ITableFilterInputConnect)=>Promise<IResult
             } as IFacet
 
           });
-          resolve({ entities: result, total: data["@odata.count"], current: input.page, facets : facetsTransform })
+          resolve({ entities: result, total: data["@odata.count"], current: input.page, facets : facetsTransform, indexPropName : input.propIndexName })
         }
 
       );

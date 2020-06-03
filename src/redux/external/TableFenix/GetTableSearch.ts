@@ -18,7 +18,7 @@ const GetTableSearch : (input : ITableInputConnect)=>Promise<IResult> = input=>{
        
         if (err) reject(err);
 
-        resolve({ entities: result, total: data["@odata.count"], current: input.page })
+        resolve({ entities: result, total: data["@odata.count"], current: input.page, indexPropName : input.propIndexName })
       }
 
     );
