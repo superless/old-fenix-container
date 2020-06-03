@@ -1,6 +1,6 @@
-import { watchOnLoadTable } from "./watchOnLoadTable";
+import { watchOnLoadTable , watchOnLoadTableFilter} from "./watchOnLoadTable";
 
-export {watchOnLoadTable}
+export {watchOnLoadTable, watchOnLoadTableFilter}
 
 
 

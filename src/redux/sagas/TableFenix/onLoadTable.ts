@@ -1,4 +1,4 @@
-import { ITableInputConnect } from "../../../model/TableFenix/input";
+import { ITableInputConnect, ITableFilterInput } from "../../../model/TableFenix/input";
 import { put, call } from "redux-saga/effects";
 import { GetTableSearch } from "../../external";
 import { GetIdRelations } from "../../../util";
@@ -26,14 +26,17 @@ export function* onLoadTable(input: ITableInputConnect) {
     const tableResultNames: IResult = {
       current: tableResult.current,
       total: tableResult.total,
+      indexPropName : input.propIndexName,
       entities: tableResult.entities.map(s => ({
         ...s,
         rel: s.rel.map(r => ({ ...r, name: names[r.entityIndex].some(f => f.id === r.entityId) ? names[r.entityIndex].filter(f => f.id === r.entityId)[0].name : "" }))
       }))
     };
-    yield put(tableEvents.GetTableSuccess(tableResultNames, input.entity));
+    yield put(tableEvents.GetTableSuccess(tableResultNames, input.entity, input.pathname));
   }
   catch (error) {
     yield put(tableEvents.GetTableFailure(error));
   }
 }
+
+

@@ -14,7 +14,7 @@ export default interface ISearchQuery{
   /**
    * facets del search
    */
-  facets?:string;
+  facets?:string[];
 
   /**
    * filtro del search
