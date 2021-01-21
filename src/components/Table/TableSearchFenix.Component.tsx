@@ -63,10 +63,10 @@ export class TableSearchFenix extends React.Component<INestedTableFenixProps,INe
               url: context.connect.searchConnect.url, // url de azure
               elementsInPage: itemPerPage, // numero de elementos en la página
               entity, // índice de la tabla
-              index: context.connect.searchConnect.index, //
-              key: context.connect.searchConnect.key,
-              page: 1,
-              propIndexName: propIndexName,
+              index: context.connect.searchConnect.index, // índice en azure.
+              key: context.connect.searchConnect.key, // clave del azure.
+              page: 1, // página a cargar
+              propIndexName: propIndexName, // nombre de la propiedad
               pathname: pathName,
               filter: this.state.currentFilter,
             });
