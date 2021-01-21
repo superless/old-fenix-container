@@ -6,39 +6,41 @@ import { ITableFilterInputConnect } from '../../model/TableFenix/input';
 import { IEntityNameId } from '@fenix/fenix-components/dist/components/Table/base/model';
 
 export interface INestedTableFenixProps {
-  entity: number;
-  result: { [pathname: string]: { [num: number]: IResult } } | undefined;
-  isLoading: boolean;
-  itemPerPage: number;
-  error: Error | string | null;
-  propIndexName: number;
-  pathName: string;
-  enumValue: (indexEnun: number, valueEnum: number) => string;
-  onLoad?: (input: ITableFilterInputConnect) => void;
-  headerRelated: (header: number) => string;
-  headerProperty: (header: number, typeRelated: Related) => string;
-  cellheaders?: JSX.Element[];
-  cells?: ((elem: IEntitySearch) => JSX.Element)[];
-  filter?: boolean;
+  entity: number; // índice de la entidad de la tabla.
+  result: { [pathname: string]: { [num: number]: IResult } } | undefined; // source desde redux.
+  isLoading: boolean; // loading, desde redux
+  itemPerPage: number; // items por página
+  error: Error | string | null; // error desde redux.
+  propIndexName: number; // nombre de la tabla
+  pathName: string; // ruta de edición
+  enumValue: (indexEnun: number, valueEnum: number) => string; // entrega el nombre de una enumeración.
+  onLoad?: (input: ITableFilterInputConnect) => void; // evento de carga de datos
+  headerRelated: (header: number) => string; // función para obtener entidades.
+  headerProperty: (header: number, typeRelated: Related) => string; // función para obtener los nombres de las propiedades.
+  cellheaders?: JSX.Element[]; // cabecera de celdas extras 
+  cells?: ((elem: IEntitySearch) => JSX.Element)[]; // celdas extras
+  filter?: boolean; // si está activado el filtro.
 }
 
+
+// modelo del state
 export interface INestedTableFenixState {
-    currentPage:number,
-    currentFilter : IFilterModel
+    currentPage:number, // página actual
+    currentFilter : IFilterModel // modelo de filtros
 }
 
+
+// table fenix
 export class TableSearchFenix extends React.Component<INestedTableFenixProps,INestedTableFenixState>{
 
-  /**
-   *
-   */
+ 
   constructor(props : INestedTableFenixProps) {
     super(props);
     
-    this.selectPage.bind(this);
-    this.filters.bind(this);
-    this.clean.bind(this);
-    this.state = {currentPage: 1, currentFilter :{}}
+    this.selectPage.bind(this); // selección de página
+    this.filters.bind(this); // filtros
+    this.clean.bind(this); // limpia filtros
+    this.state = {currentPage: 1, currentFilter :{}} // state inicial
     
 
   }
@@ -48,14 +50,20 @@ export class TableSearchFenix extends React.Component<INestedTableFenixProps,INe
     return (<ctxt.Consumer>
       {context => {
         if (context) {
+
+          // propiedades
           const {onLoad, entity, itemPerPage, propIndexName, pathName, result} = this.props;
+
+          // si existe el método onLoad y la tabla de un índice aún no ha cargado.
           if (onLoad && !context.loadedTableComponent?.get(entity)) {
+            // inicializa, indicando que la tabla aún no ha sido cargada
             context.loadedTableComponent.set(entity, false);
+            // ejecuta redux con la consulta
             onLoad({
-              url: context.connect.searchConnect.url,
-              elementsInPage: itemPerPage,
-              entity,
-              index: context.connect.searchConnect.index,
+              url: context.connect.searchConnect.url, // url de azure
+              elementsInPage: itemPerPage, // numero de elementos en la página
+              entity, // índice de la tabla
+              index: context.connect.searchConnect.index, //
               key: context.connect.searchConnect.key,
               page: 1,
               propIndexName: propIndexName,
@@ -151,7 +159,7 @@ export class TableSearchFenix extends React.Component<INestedTableFenixProps,INe
       pathname: this.props.pathName,
       filter: filter ?? this.state.currentFilter,
     });
-    console.log(this.state.currentFilter);
+
     this.setState({currentPage : item, currentFilter: filter?filter:this.state.currentFilter});
   }
   
